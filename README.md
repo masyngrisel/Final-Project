@@ -1,4 +1,4 @@
-# Final-Project
+# Final-Project(Preview is too short, all components included in description)
 Good Components used:
 -	Class based views
 -	Custom model fields
