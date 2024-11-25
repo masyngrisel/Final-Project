@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Portfolio for {{ course.name }}</h2>
+    {% if portfolios %}
+        <ul class="list-group">
+            {% for portfolio in portfolios %}
+                <li class="list-group-item">
+                    <h5>{{ portfolio.title }}</h5>
+                    <p>{{ portfolio.description }}</p>
+                    <p>Uploaded on: {{ portfolio.created_at|date:"F j, Y" }}</p>
+                    {% if portfolio.content_type == 'image' %}
+                        <img src="{{ portfolio.image.url }}" class="img-fluid" alt="{{ portfolio.title }}">
+                    {% elif portfolio.content_type == 'video' %}
+                        <video controls class="w-100">
+                            <source src="{{ portfolio.video_url }}" type="video/mp4">
+                        </video>
+                    {% elif portfolio.content_type == 'file' %}
+                        <a href="{{ portfolio.file.url }}" class="btn btn-info">View PDF</a>
+                    {% elif portfolio.content_type == 'text' %}
+                        <p>{{ portfolio.description }}</p>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No portfolio items available for this course.</p>
+    {% endif %}
+    <a href="{% url 'add_portfolio' course.id %}" class="btn btn-primary mt-3">Add Work</a>
+</div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Add Portfolio Work for {{ course.name }}</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Upload</button>
+    </form>
+    <a href="{% url 'view_portfolio' course.id %}" class="btn btn-secondary mt-3">Back to Portfolio</a>
+</div>
+{% endblock %}
